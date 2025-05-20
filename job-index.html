@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index Page</title>
+    <style>
+        /* General Form Styling */
+        body{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .form-section {
+            max-width: 800px;
+            max-height: 450px;
+            margin: 10px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        fieldset {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 6px;
+            margin-top: 40px;
+        }
+
+        legend {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            padding: 0 10px;
+        }
+
+        p {
+            font-size: 40px;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px;
+        }
+
+        /* Input Fields and Labels */
+        label {
+            display: block;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+            background-color: #fff;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+        }
+
+        /* Radio Buttons and Checkboxes */
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .language-options,
+        .technology-options {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        /* Select Dropdowns */
+        select {
+            cursor: pointer;
+        }
+
+        select[size="4"] {
+            height: 100px;
+        }
+
+        /* Number Nav */
+        .nav-class-number {
+            gap: 25px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .number-nav {
+            text-align: center;
+            margin: 10px 5px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* Buttons */
+        button,
+        input[type="reset"],
+        input[type="button"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+
+        button:hover,
+        input[type="reset"]:hover,
+        input[type="button"]:hover {
+            background-color: #45a049;
+        }
+
+        button.add-field {
+            background-color: #2196F3;
+        }
+
+        button.add-field:hover {
+            background-color: #1e88e5;
+        }
+
+        button[onclick*="remove"] {
+            background-color: #db340a;
+        }
+
+        button[onclick*="remove"]:hover {
+            background-color: #c12e09;
+        }
+
+        /* Dynamic Rows */
+        .education-row,
+        .work-experience-row,
+        .reference-row,
+        .language-row,
+        .technology-row {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .education-item,
+        .work-experience-item,
+        .reference-item,
+        .language-item,
+        .technology-item {
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+
+        /* Specific Adjustments */
+        #pref-location {
+            padding: 5px;
+        }
+
+        input[placeholder="write +91-"] {
+            font-style: italic;
+        }
+
+        input[placeholder="YYYY-MM-DD"],
+        input[placeholder="YYYY"],
+        input[placeholder="eg. 75.54"],
+        input[placeholder="In months"] {
+            font-style: italic;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .form-section {
+                padding: 15px;
+            }
+
+            input,
+            textarea,
+            select,
+            button {
+                font-size: 14px;
+            }
+
+            .language-options,
+            .technology-options {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        /* Navigating Buttons */
+        .navigation {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .navigation button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .navigation button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .navigation button:hover:not(:disabled) {
+            background-color: #45a049;
+        }
+
+        /* Tooltip container */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+            /* If you want dots under the hoverable text */
+        }
+
+        /* Tooltip text */
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            padding: 5px 0;
+            border-radius: 6px;
+
+            /* Position the tooltip text */
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+
+            /* Fade in tooltip */
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        /* Tooltip arrow */
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+        /* Show the tooltip text when you mouse over the tooltip container */
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Buttons -->
+    <div class="navigation">
+        <button type="button" id="prevBtn" onclick="navigateSection('prev')">Previous</button>
+        <button type="button" id="nextBtn" onclick="navigateSection('next')">Next</button>
+        <button type="button" id="nextBtn" onclick="navigateSection('save')" hidden>Submit Form</button>
+    </div>
+
+    <!-- Basic Form 1 -->
+    <section class="form-section" id="form1">
+        <p>Basic Details</p>
+        <fieldset>
+            <legend>Basic Details</legend>
+            <label for="first-name-id">First Name</label>
+            <input type="text" name="fname" id="first-name-id" />
+            <label for="last-name-id">Last Name</label>
+            <input type="text" name="lname" id="last-name-id" />
+            <label for="designation-id">Designation</label>
+            <input type="text" name="designation" id="designation-id" />
+            <label for="address1-id">Address 1</label>
+            <textarea name="add1" id="address1-id"></textarea>
+            <label for="address2-id">Address 2</label>
+            <textarea name="add2" id="address2-id"></textarea>
+            <label for="email-id">Email</label>
+            <input type="email" name="email" id="email-id" />
+            <label for="phone-id">Phone</label>
+            <input type="tel" name="phone" id="phone-id" placeholder="write +91-" />
+            <label for="city-id">City</label>
+            <input type="text" name="city" id="city-id" />
+            <label for="state-id">State</label>
+            <select name="state" id="state-id">
+                <option value="gujarat">Gujarat</option>
+                <option value="goa">Goa</option>
+                <option value="jnk">Jammu Kashmir</option>
+                <option value="delhi">Delhi</option>
+            </select>
+            <label>Gender</label>
+            <input type="radio" name="gender" id="male-id" value="male" /> Male
+            <input type="radio" name="gender" id="female-id" value="female" checked /> Female
+            <input type="radio" name="gender" id="other-id" value="other" /> Other
+            <label for="zipcode-id">Zipcode</label>
+            <input type="text" name="zipcode" id="zipcode-id" />
+            <label for="rel-status-id">Relationship Status</label>
+            <select name="rel_status" id="rel-status-id">
+                <option value="single">Single</option>
+                <option value="married">Married</option>
+                <option value="unmarried">Unmarried</option>
+                <option value="divorce">Divorce</option>
+            </select>
+            <label for="dob-id">Date of Birth</label>
+            <input type="date" name="dob" id="dob-id" />
+            <input type="reset" value="Reset Basic Details">
+        </fieldset>
+    </section>
+
+    <!-- Education Details Form 2 -->
+    <section class="form-section" id="form2">
+        <p>Education Details</p>
+        <fieldset>
+            <legend>Education Details</legend>
+            <div id="education-container">
+                <div class="education-row">
+                    <div class="education-item">
+                        <label><b>Course Name</b></label>
+                        <input type="text" name="course_name_1" id="course-name-1"
+                            placeholder="SSC/HSC/Bachelors/Masters" />
+                        <label>University:</label>
+                        <input type="text" name="university_1" id="university-1" />
+                        <label>Passing Year:</label>
+                        <input type="text" name="passing_year_1" id="passing-year-1" placeholder="YYYY" />
+                        <label>Percentage:</label>
+                        <input type="text" name="percentage_1" id="percentage-1" placeholder="eg. 75.54" />
+                        <button type="button" onclick="removeEducationRow(this)">Delete</button>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="educationCount" id="educationCount" value="1" />
+            <button type="button" class="add-field" onclick="addEducationRow()">Add Education</button>
+            <input type="reset" value="Reset Education Details">
+        </fieldset>
+    </section>
+
+    <!-- Work Experience Form 3-->
+    <section class="form-section" id="form3">
+        <p>Work Experience</p>
+        <fieldset>
+            <legend>Work Experience</legend>
+            <div id="work-experience-container">
+                <div class="work-experience-row">
+                    <div class="work-experience-item">
+                        <label><b>Company Name</b></label>
+                        <input type="text" name="company_name_1" id="company-name-1" />
+                        <label>Designation:</label>
+                        <input type="text" name="designation_1" id="designation-1" />
+                        <label>From:</label>
+                        <input type="text" name="work_from_1" id="work-from-1" placeholder="YYYY-MM-DD" />
+                        <label>To:</label>
+                        <input type="text" name="work_to_1" id="work-to-1" placeholder="YYYY-MM-DD" />
+                        <button type="button" onclick="removeWorkExperienceRow(this)">Delete</button>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="workExperienceCount" id="workExperienceCount" value="1" />
+            <button type="button" class="add-field" onclick="addWorkExperienceRow()">Add Work Experience</button>
+            <input type="reset" value="Reset Work Experience">
+        </fieldset>
+    </section>
+
+    <!-- References Form 4-->
+    <section class="form-section" id="form4">
+        <p>References</p>
+        <fieldset>
+            <legend>Reference Contact</legend>
+            <div id="reference-container">
+                <div class="reference-row">
+                    <div class="reference-item">
+                        <label><b>Reference's Name</b></label>
+                        <input type="text" name="ref_name_1" id="ref-name-1" />
+                        <label>Reference's Contact</label>
+                        <input type="text" name="ref_phone_1" id="ref-phone-1" placeholder="write +91-" />
+                        <label>Reference's Relation</label>
+                        <input type="text" name="ref_relation_1" id="ref-relation-1" />
+                        <button type="button" onclick="removeReferenceRow(this)">Delete</button>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="referenceCount" id="referenceCount" value="1" />
+            <button type="button" class="add-field" onclick="addReferenceRow()">Add References</button>
+            <input type="reset" value="Reset Reference Contact">
+        </fieldset>
+    </section>
+
+    <!-- Technology Known Form 5-->
+    <section class="form-section" id="form5">
+        <p>Technology Known</p>
+        <fieldset class="technology-fieldset">
+            <legend>Technology Known</legend>
+            <div class="technology-row">
+                <div class="technology-item">
+                    <label><input type="checkbox" name="skill_name[]" value="php" /> PHP</label>
+                    <div class="technology-options">
+                        <label><input type="radio" name="php-skill" value="beginner" /> Beginner</label>
+                        <label><input type="radio" name="php-skill" value="mediator" /> Mediator</label>
+                        <label><input type="radio" name="php-skill" value="expert" /> Expert</label>
+                    </div>
+                </div>
+                <div class="technology-item">
+                    <label><input type="checkbox" name="skill_name[]" value="mysql" /> MySQL</label>
+                    <div class="technology-options">
+                        <label><input type="radio" name="mysql-skill" value="beginner" /> Beginner</label>
+                        <label><input type="radio" name="mysql-skill" value="mediator" /> Mediator</label>
+                        <label><input type="radio" name="mysql-skill" value="expert" /> Expert</label>
+                    </div>
+                </div>
+                <div class="technology-item">
+                    <label><input type="checkbox" name="skill_name[]" value="laravel" /> Laravel</label>
+                    <div class="technology-options">
+                        <label><input type="radio" name="laravel-skill" value="beginner" /> Beginner</label>
+                        <label><input type="radio" name="laravel-skill" value="mediator" /> Mediator</label>
+                        <label><input type="radio" name="laravel-skill" value="expert" /> Expert</label>
+                    </div>
+                </div>
+                <div class="technology-item">
+                    <label><input type="checkbox" name="skill_name[]" value="oracle" /> Oracle</label>
+                    <div class="technology-options">
+                        <label><input type="radio" name="oracle-skill" value="beginner" /> Beginner</label>
+                        <label><input type="radio" name="oracle-skill" value="mediator" /> Mediator</label>
+                        <label><input type="radio" name="oracle-skill" value="expert" /> Expert</label>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="technologyCount" id="technologyCount" value="0" />
+            <input type="reset" value="Reset Technology Known">
+        </fieldset>
+    </section>
+
+    <!-- Languages Known Form 6-->
+    <section class="form-section" id="form6">
+        <p>Languages Known</p>
+        <fieldset class="language-fieldset">
+            <legend>Language Known</legend>
+            <div class="language-row">
+                <div class="language-item">
+                    <label><input type="checkbox" name="lang[]" value="hindi" /> Hindi</label>
+                    <div class="language-options">
+                        <label><input type="checkbox" name="hindi[write]" /> Write</label>
+                        <label><input type="checkbox" name="hindi[read]" /> Read</label>
+                        <label><input type="checkbox" name="hindi[speak]" /> Speak</label>
+                    </div>
+                </div>
+                <div class="language-item">
+                    <label><input type="checkbox" name="lang[]" value="english" /> English</label>
+                    <div class="language-options">
+                        <label><input type="checkbox" name="english[write]" /> Write</label>
+                        <label><input type="checkbox" name="english[read]" /> Read</label>
+                        <label><input type="checkbox" name="english[speak]" /> Speak</label>
+                    </div>
+                </div>
+                <div class="language-item">
+                    <label><input type="checkbox" name="lang[]" value="gujarati" /> Gujarati</label>
+                    <div class="language-options">
+                        <label><input type="checkbox" name="gujarati[write]" /> Write</label>
+                        <label><input type="checkbox" name="gujarati[read]" /> Read</label>
+                        <label><input type="checkbox" name="gujarati[speak]" /> Speak</label>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="languageCount" id="languageCount" value="0" />
+            <input type="reset" value="Reset Language Known">
+        </fieldset>
+    </section>
+
+
+    <div class="nav-class-number">
+        <!-- Navigation Number Buttons -->
+        <div class="tooltip">
+            <button class="number-nav" id="1">1</button>
+            <span class="tooltiptext">Basic Details</span>
+        </div>
+        <div class="tooltip">
+            <button class="number-nav" id="2">2</button>
+            <span class="tooltiptext">Education Details</span>
+        </div>
+        <div class="tooltip">
+            <button class="number-nav" id="3">3</button>
+            <span class="tooltiptext">Work Experience</span>
+        </div>
+        <div class="tooltip">
+            <button class="number-nav" id="4">4</button>
+            <span class="tooltiptext">References</span>
+        </div>
+        <div class="tooltip">
+            <button class="number-nav" id="5">5</button>
+            <span class="tooltiptext">Technology Known</span>
+        </div>
+        <div class="tooltip">
+            <button class="number-nav" id="6">6</button>
+            <span class="tooltiptext">Language Known</span>
+        </div>
+
+    </div>
+
+</body>
+<script src="job-navigate-script.js"></script>
+<script src="job-details-script.js"></script>
+
+</html>
